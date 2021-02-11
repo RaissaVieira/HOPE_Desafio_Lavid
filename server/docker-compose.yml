@@ -1,0 +1,42 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    
+    restart: always
+
+    networks:
+      - HOPE-net
+    container_name: postgres-HOPE
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_USER=docker
+      - POSTGRES_DB=HOPE
+      - PGDATA=/tmp
+  pgadmin:
+    image: dpage/pgadmin4:latest
+
+    networks:
+      - HOPE-net
+    container_name: pgadmin-HOPE
+    volumes:
+      - pgadmin-pg:/var/lib/pgadmin
+    expose:
+      - 15432
+    ports:
+      - 15432:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@teste.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+networks:
+  HOPE-net:
+
+volumes:
+  postgres-db:
+  pgadmin-pg:
