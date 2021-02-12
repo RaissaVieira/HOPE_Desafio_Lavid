@@ -44,7 +44,7 @@ module.exports = {
             }
 
             if (!await bcrypt.compare(password, user.password)) {
-                return res.status(400).json({ error: "Invalid password" });
+                return res.status(400).json({ error: "Senha inválida" });
             }
 
             const token = generateJWT({id: user.id});
@@ -56,6 +56,21 @@ module.exports = {
 
         } catch (err) {
             return res.status(400).json({ error: "Falha na autenticação do usuário" });
+        }
+    },
+
+    async Name (req, res) {
+        try {
+            const { userId } = req;
+        
+            const [user] = await connection('users')
+                    .where('id', userId)
+                    .select('name');
+
+            return res.json( user );
+        
+        } catch (err) {
+            return res.status(400).json({ error: "Can't get user information" });
         }
     }
 }
