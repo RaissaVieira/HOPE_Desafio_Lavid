@@ -6,6 +6,8 @@ routes.post('/register', userController.Create);
 
 routes.post('/authentication', userController.Authentication);
 
+routes.post('/forgotPassword', userController.ForgotPassword);
+
 routes.use(authenticate);
 
 routes.get('/name', userController.Name);
