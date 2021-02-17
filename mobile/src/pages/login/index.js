@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Button, TextInput, Text } from 'react-native';
+import { View, Button, TextInput, Text, AsyncStorage } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles.js';
 import Header from '../../components/Header';
@@ -26,12 +26,14 @@ export default function Login() {
 
     try {
       
-      await api.post('authentication', user);
+      const response = await api.post('authentication', user);
+
+      AsyncStorage.setItem('Token', `${response.data.token}`);
       
       navigation.navigate('Welcome');
 
     } catch (err) {
-      alert('Erro ao fazer login');
+      alert('Email e/ou senha inválidos');
     }
 
   }
