@@ -17,19 +17,16 @@ export default function ForgotPassword() {
       email: email,
     }
   
-    await api.post('forgotPassword', user)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-    /* try {
+    try {
       
-  
+      await api.post('forgotPassword', user)
+        .then(function (response) {
+          console.log(response);
+        })
+      
     } catch (err) {
-      alert('Erro ao solicitar nova senha');
-    } */
+      alert('Email nao cadastrado');
+    }
   }
 
   function handleGoToBackLogin() {
