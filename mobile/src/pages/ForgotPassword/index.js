@@ -20,10 +20,9 @@ export default function ForgotPassword() {
     try {
       
       await api.post('forgotPassword', user)
-        .then(function (response) {
-          console.log(response);
-        })
-      
+        .then()
+          
+        alert('Email enviado ao usuário')
     } catch (err) {
       alert('Email nao cadastrado');
     }
